@@ -1,0 +1,40 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+</style>
+
+<div class="container-fluid title pt-2 pb-1">
+  <h2>Introducción a Jison</h2>
+</div>
+
+<div class="container pt-4">
+
+  <form #iForm="ngForm" class="mb-4" (ngSubmit)="onSubmit()" novalidate>
+    <div class="row mb-5 fila">
+      <div class="col-lg-6 col-sm-12">
+        <p class="my-0 text-white subtitulo">Entrada</p>
+        <ngx-monaco-editor id="entrada" name="entrada" class="codebox" [options]="EditorOptions" [(ngModel)]="entrada">
+        </ngx-monaco-editor>
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <p class="my-0 text-white subtitulo">Salida</p>
+        <ngx-monaco-editor id="salida" name="salida" class="codebox" [options]="ConsoleOptions" [(ngModel)]="salida">
+        </ngx-monaco-editor>
+      </div>
+    </div>
+
+    <div class="row text-center p-1">
+      <div class="col-12">
+        <button type="submit" class="btn btn-outline-light btn-lg">COMPILAR</button>
+      </div>
+    </div>
+  </form>
+  <hr>
+</div>
+
+<footer class="text-center text-lg-start">
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <p class="foot my-0">
+      © 2022 Conferencia - Introducción a patrón intérprete con Jison
+    </p>
+  </div>
+</footer>

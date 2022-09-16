@@ -1,0 +1,38 @@
+.title {
+    background-color:#c1502e;
+    font-family: 'Varela Round', sans-serif;
+}
+
+button {
+    font-family: 'Varela Round', sans-serif;
+}
+
+.subtitulo {
+    font-family: 'Varela Round', sans-serif;
+    font-size: large;
+}
+
+.foot {
+    font-family: 'Varela Round', sans-serif;
+    color: lightgrey;
+}
+
+.codebox {
+    width: 500px;
+    height: 420px;
+}
+
+.fila {
+    height: 420px;
+}
+
+hr {
+    border-width: 0.13em;
+    border-color: gray;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

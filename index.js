@@ -19,11 +19,11 @@ app.post('/compile', (req, res) => {
     // console.log(ast);
     if (ast.errores.length > 0) {
         console.log('Se encontraron errores al analizar la entrada.', ast.errores);
-        res.status(400).send(ast.errores);
+        res.status(400).send(ast.errores[0].error);
     }
     else {
         var salida = Bloque(ast.instrucciones);
-        res.send(salida);
+        res.send({ output: salida });
     }
 });
 

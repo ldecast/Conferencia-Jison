@@ -425,7 +425,7 @@ _handle_error:
 
 	function nuevaFuncion(_parametro, _idFuncion, _linea, _columna) {
 		let obj = {
-			parametro: _valor,
+			parametro: _parametro,
 			idFuncion: _idFuncion,
 			linea: _linea,
 			columna: _columna
