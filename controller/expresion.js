@@ -12,21 +12,10 @@ function Expresion(_expresion) {
         const Aritmetica = require("../model/Aritmetica");
         return Aritmetica(_expresion);
     }
-    else if (_expresion.tipo === 'TO_LOWER') {
-        const { ToLower } = require("../Funciones/Reservadas");
-        return ToLower(_expresion);
-    }
-    else if (_expresion.tipo === 'TO_UPPER') {
-        const { ToUpper } = require("../Funciones/Reservadas");
-        return ToUpper(_expresion);
-    }
-    else if (_expresion.tipo === 'TRUNCATE') {
-        const { Truncate } = require("../Funciones/Reservadas");
-        return Truncate(_expresion);
-    }
-    else if (_expresion.tipo === 'ROUND') {
-        const { Round } = require("../Funciones/Reservadas");
-        return Round(_expresion);
+    else if (_expresion.idFuncion === 'TO_LOWER' || _expresion.idFuncion === 'TO_UPPER'
+        || _expresion.idFuncion === 'TRUNCATE' || _expresion.idFuncion === 'ROUND') {
+        const Funciones = require("../model/Funciones");
+        return Funciones(_expresion);
     }
     else return undefined;
 }

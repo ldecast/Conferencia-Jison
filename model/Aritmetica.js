@@ -15,6 +15,7 @@ function Aritmetica(_operacion) {
         case 'NEGATIVO':
             return v2 - v1;
         default:
+            console.log("Error al reconocer: ", _operacion)
             return undefined;
     }
 }

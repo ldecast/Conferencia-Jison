@@ -19,6 +19,7 @@
 "truncate"				return 'prtruncate'
 "round"					return 'prround'
 ";"						return 'ptcoma'
+","						return 'coma'
 
 "*"                   	return 'multi'
 "/"                   	return 'div'
@@ -69,9 +70,20 @@
 		return obj;
 	}
 
-	function nuevaFuncion(_valor, _idFuncion, _linea, _columna) {
+	function nuevaFuncion(_parametro, _idFuncion, _linea, _columna) {
 		let obj = {
-			valor: _valor,
+			parametro: _valor,
+			idFuncion: _idFuncion,
+			linea: _linea,
+			columna: _columna
+		};
+		return obj;
+	}
+
+	function reservadaRound(_parametro, _decimales, _idFuncion, _linea, _columna) {
+		let obj = {
+			parametro: _parametro,
+			decimales: _decimales,
 			idFuncion: _idFuncion,
 			linea: _linea,
 			columna: _columna
@@ -111,8 +123,8 @@ EXPRESION: 	EXPRESION suma EXPRESION {$$= nuevaOperacionBinaria($1, $3, 'SUMA', 
 			| menos EXPRESION %prec umenos {$$= nuevaOperacionBinaria($2, null, 'NEGATIVO', this._$.first_line,this._$.first_column+1);}
 			| pabre EXPRESION pcierra {$$=$2}
 			| cadena {$$ = nuevoValor($1, 'CADENA', this._$.first_line,this._$.first_column+1)}
-			| entero {$$ = nuevoValor(Number($1), 'ENTERO', this._$.first_line,this._$.first_column+1)}
-			| doble {$$ = nuevoValor(Number($1), 'DOBLE', this._$.first_line,this._$.first_column+1)}
+			| entero {$$ = nuevoValor($1, 'ENTERO', this._$.first_line,this._$.first_column+1)}
+			| doble {$$ = nuevoValor($1, 'DOBLE', this._$.first_line,this._$.first_column+1)}
 ;
 
 FUNCIONESRESERVADAS: FTOLOWER {$$=$1}
@@ -130,7 +142,7 @@ FTOUPPER: prtoUpper pabre EXPRESION pcierra {$$ = nuevaFuncion($3, 'TO_UPPER', t
 FTRUNCATE: prtruncate pabre EXPRESION pcierra {$$ = nuevaFuncion($3, 'TRUNCATE', this._$.first_line, this._$.first_column+1)}
 ;
 
-FROUND: prround pabre EXPRESION pcierra {$$ = nuevaFuncion($3, 'ROUND', this._$.first_line, this._$.first_column+1)}
+FROUND: prround pabre EXPRESION coma entero pcierra {$$ = reservadaRound($3, $5, 'ROUND', this._$.first_line, this._$.first_column+1)}
 ;
 
 LISTAVALORES: LISTAVALORES coma VALORES {$1.push($3); $$=$1;}
