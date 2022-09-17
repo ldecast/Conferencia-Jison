@@ -14,10 +14,12 @@
 "//".*								// EndOfLineComment
 [/][*][^*]*[*]+([^/*][^*]*[*]+)*[/]	// MultiLineComment
 
+/* TOKENS Y PALABRAS RESERVADAS */
 "toLower"				return 'prtoLower'
 "toUpper"				return 'prtoUpper'
 "truncate"				return 'prtruncate'
 "round"					return 'prround'
+"random"				return 'prrandom'
 ";"						return 'ptcoma'
 ","						return 'coma'
 
@@ -80,10 +82,10 @@
 		return obj;
 	}
 
-	function reservadaRound(_parametro, _decimales, _idFuncion, _linea, _columna) {
+	function funcionDosParametros(_parametro1, _parametro2, _idFuncion, _linea, _columna) {
 		let obj = {
-			parametro: _parametro,
-			decimales: _decimales,
+			parametro: _parametro1,
+			parametro2: _parametro2,
 			idFuncion: _idFuncion,
 			linea: _linea,
 			columna: _columna
@@ -131,6 +133,7 @@ FUNCIONESRESERVADAS: FTOLOWER {$$=$1}
 					| FTOUPPER {$$=$1}
 					| FTRUNCATE {$$=$1}
 					| FROUND {$$=$1}
+					| FRANDOM {$$=$1}
 ;
 
 FTOLOWER: prtoLower pabre EXPRESION pcierra {$$ = nuevaFuncion($3, 'TO_LOWER', this._$.first_line, this._$.first_column+1)}
@@ -142,7 +145,10 @@ FTOUPPER: prtoUpper pabre EXPRESION pcierra {$$ = nuevaFuncion($3, 'TO_UPPER', t
 FTRUNCATE: prtruncate pabre EXPRESION pcierra {$$ = nuevaFuncion($3, 'TRUNCATE', this._$.first_line, this._$.first_column+1)}
 ;
 
-FROUND: prround pabre EXPRESION coma entero pcierra {$$ = reservadaRound($3, $5, 'ROUND', this._$.first_line, this._$.first_column+1)}
+FROUND: prround pabre EXPRESION coma entero pcierra {$$ = funcionDosParametros($3, $5, 'ROUND', this._$.first_line, this._$.first_column+1)}
+;
+
+FRANDOM: prrandom pabre EXPRESION coma EXPRESION pcierra {$$ = funcionDosParametros($3, $5, 'RANDOM', this._$.first_line, this._$.first_column+1)}
 ;
 
 LISTAVALORES: LISTAVALORES coma VALORES {$1.push($3); $$=$1;}

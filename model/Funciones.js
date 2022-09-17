@@ -10,8 +10,11 @@ function Funciones(_reservada) {
         case 'TRUNCATE':
             return Math.trunc(valor);
         case 'ROUND':
-            let decimals = parseInt(_reservada.decimales);
+            let decimals = parseInt(_reservada.parametro2);
             return valor.toFixed(decimals);
+        case 'RANDOM':
+            let max = Expresion(_reservada.parametro2);
+            return Math.floor(Math.random() * (max - valor + 1) + valor);
         default:
             console.log("Error al reconocer: ", _reservada)
             return undefined;

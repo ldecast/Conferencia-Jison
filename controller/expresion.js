@@ -13,7 +13,7 @@ function Expresion(_expresion) {
         return Aritmetica(_expresion);
     }
     else if (_expresion.idFuncion === 'TO_LOWER' || _expresion.idFuncion === 'TO_UPPER'
-        || _expresion.idFuncion === 'TRUNCATE' || _expresion.idFuncion === 'ROUND') {
+        || _expresion.idFuncion === 'TRUNCATE' || _expresion.idFuncion === 'ROUND' || _expresion.idFuncion === 'RANDOM') {
         const Funciones = require("../model/Funciones");
         return Funciones(_expresion);
     }
